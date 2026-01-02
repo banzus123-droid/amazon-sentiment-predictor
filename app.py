@@ -12,20 +12,16 @@ from textblob import TextBlob  # For detecting score from text
 
 # --- INITIALIZATION ---
 # Ensure NLTK data is available
-def download_nltk_resources():
-    resources = [
-        ('tokenizers/punkt', 'punkt'),
-        ('tokenizers/punkt_tab', 'punkt_tab'), # Added this specific one
-        ('corpora/stopwords', 'stopwords'),
-        ('corpora/wordnet', 'wordnet')
-    ]
-    for path, name in resources:
-        try:
-            nltk.data.find(path)
-        except LookupError:
-            nltk.download(name)
+# Force download all required resources to prevent LookupErrors on the cloud
+nltk.download('punkt')
+nltk.download('punkt_tab')  # Critical for word_tokenize in new NLTK versions
+nltk.download('stopwords')
+nltk.download('wordnet')
 
-download_nltk_resources()
+# Now import the components that depend on those downloads
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import WordNetLemmatizer
 
 # --- PREPROCESSING FUNCTIONS ---
 stop_words = set(stopwords.words("english"))
@@ -160,3 +156,4 @@ st.markdown("""
 
 
 st.caption("A251 STISK 2133 Predictive Analytics - Assignment 2")
+

@@ -12,12 +12,20 @@ from textblob import TextBlob  # For detecting score from text
 
 # --- INITIALIZATION ---
 # Ensure NLTK data is available
-try:
-    nltk.data.find('corpora/stopwords')
-except LookupError:
-    nltk.download('punkt')
-    nltk.download('stopwords')
-    nltk.download('wordnet')
+def download_nltk_resources():
+    resources = [
+        ('tokenizers/punkt', 'punkt'),
+        ('tokenizers/punkt_tab', 'punkt_tab'), # Added this specific one
+        ('corpora/stopwords', 'stopwords'),
+        ('corpora/wordnet', 'wordnet')
+    ]
+    for path, name in resources:
+        try:
+            nltk.data.find(path)
+        except LookupError:
+            nltk.download(name)
+
+download_nltk_resources()
 
 # --- PREPROCESSING FUNCTIONS ---
 stop_words = set(stopwords.words("english"))
@@ -149,5 +157,6 @@ st.markdown("""
 - **Length is key**: Too short or too long reviews might confuse the system.
 - **Experiment**: Try writing positive or negative reviews to see how the detected score changes!
 """)
+
 
 st.caption("A251 STISK 2133 Predictive Analytics - Assignment 2")

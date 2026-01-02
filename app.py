@@ -145,15 +145,7 @@ if st.button("Analyze Sentiment", type="primary"):
 
 st.markdown("---")
 
-# Tips Section
-st.subheader("💡 Quick Tips")
-st.markdown("""
-- **Write naturally**: The system understands everyday language and detects sentiment from your words.
-- **System detects score**: No need to input stars—the system infers them automatically.
-- **Length is key**: Too short or too long reviews might confuse the system.
-- **Experiment**: Try writing positive or negative reviews to see how the detected score changes!
-""")
-
 
 st.caption("A251 STISK 2133 Predictive Analytics - Assignment 2")
+
 
